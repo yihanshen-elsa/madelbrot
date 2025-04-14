@@ -1,4 +1,4 @@
-package mandelbrot;
+package mandelbrot.calc;
 
 public class ComplexNumbers {
     private double real;

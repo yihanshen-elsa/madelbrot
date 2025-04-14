@@ -34,7 +34,7 @@ public class JavaFXDemo extends Application {
                 List<ComplexNumbers> result = new ArrayList<>();
                 ComplexNumbers z = new ComplexNumbers(0, 0);
 
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < 30; i++) {
                     z = z.multiply(z).add(c);
                     result.add(z);
                 }

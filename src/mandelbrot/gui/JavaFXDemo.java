@@ -1,32 +1,60 @@
 package mandelbrot.gui;
+
 import javafx.application.Application;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Screen;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import mandelbrot.calc.ComplexNumbers;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class JavaFXDemo extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        // Hole die Bildschirmgröße
-        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        Label realLabel = new Label("Realteil:");
+        TextField realInput = new TextField();
 
-        // Erstelle eine einfache Oberfläche
-        StackPane root = new StackPane(new Label("Hallo JavaFX 🙂"));
-        Scene scene = new Scene(root, screenBounds.getWidth(), screenBounds.getHeight());
+        Label imagLabel = new Label("Imaginärteil:");
+        TextField imagInput = new TextField();
 
-        // Setze Größe und Position
-        primaryStage.setX(screenBounds.getMinX());
-        primaryStage.setY(screenBounds.getMinY());
-        primaryStage.setWidth(screenBounds.getWidth());
-        primaryStage.setHeight(screenBounds.getHeight());
+        Button drawButton = new Button("Draw");
 
-        // Stage konfigurieren
-        primaryStage.setTitle("Vollbild JavaFX");
+        VBox inputBox = new VBox(10, realLabel, realInput, imagLabel, imagInput, drawButton);
+        inputBox.setStyle("-fx-padding: 20;");
+
+        drawButton.setOnAction(e -> {
+            try {
+                double re = Double.parseDouble(realInput.getText());
+                double im = Double.parseDouble(imagInput.getText());
+
+                ComplexNumbers c = new ComplexNumbers(re, im);
+                List<ComplexNumbers> result = new ArrayList<>();
+                ComplexNumbers z = new ComplexNumbers(0, 0);
+
+                for (int i = 0; i < 10; i++) {
+                    z = z.multiply(z).add(c);
+                    result.add(z);
+                }
+
+                DrawingDemo.points = result;
+                DrawingDemo demo = new DrawingDemo();
+                Stage drawStage = new Stage();
+                demo.start(drawStage);
+
+            } catch (NumberFormatException ex) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Bitte gültige Zahlen eingeben!");
+                alert.show();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        Scene scene = new Scene(inputBox, 300, 200);
         primaryStage.setScene(scene);
+        primaryStage.setTitle("Komplexe Zahlen eingeben");
         primaryStage.show();
     }
 

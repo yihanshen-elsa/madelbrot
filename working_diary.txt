@@ -1,0 +1,17 @@
+16:55 13/04/2025
+worked on calc-1: created a new class Main.java and ComplexNumbers.java and pushed it. Check if this also works on macOS.
+
+10:59 14/04/2025
+created and worked on issue gui-1 which is about including JavaFX and creating a first dummy test class JavaFXDemo.java 
+
+16/04/2025
+- Thinking about the documentation of the project, (-> issue: doc-1) 
+- Describing some mathematical background (-> mathematical_background.md)
+- Thinking about how to catch cycles (-> cycles.md)
+- Thinking about divergence and convergence criteria (-> div_conv.md)
+- Thinking about "How to capture mathematical reality with data?" (-> metaphysics.md)
+- Thinking about Performance: There is actually a (smart) way of caching possible, right!? (-> caching.md)
+- Thinking about how to use subpoints on pixels to smoothen the picture (-> anti_aliasing.md)
+
+17/04/2025
+pushed doc-1
